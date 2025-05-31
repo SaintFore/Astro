@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: 'My first'
 pubDate: 2025-05-29
 description: '这就是一个普通的文档'
