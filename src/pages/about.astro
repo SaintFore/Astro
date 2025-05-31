@@ -1,7 +1,7 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 const pageTitle = "About Me";
 
@@ -9,8 +9,8 @@ const identity = {
     firstname: "August",
     country: "China",
     occupation: "Software Engineer",
-    hobbies: ["coding", "reading", "gaming"]
-}
+    hobbies: ["coding", "reading", "gaming"],
+};
 
 const skills = ["HTML", "CSS", "JavaScript", "Astro", "React", "Node.js"];
 
@@ -44,35 +44,45 @@ const textCase = "uppercase";
         </style>
     </head>
     <body>
-		<Header />
+        <Header />
 
-		<h1>About Me</h1>
-		<h2>{pageTitle}</h2>
-		<h1>My Astro Site soleil</h1>
+        <h1>About Me</h1>
+        <h2>{pageTitle}</h2>
+        <h1>My Astro Site soleil</h1>
 
-        <p>Here are some information about me: </p>
+        <p>Here are some information about me:</p>
         <ul>
             <li>First Name: {identity.firstname}</li>
             <li>Country: {identity.country}</li>
             <li>Occupation: {identity.occupation}</li>
-            {identity.hobbies.length >= 2 &&
-                <li>Two of my hobbies are : {identity.hobbies[0]} and {identity.hobbies[1]}</li>}
+            {
+                identity.hobbies.length >= 2 && (
+                    <li>
+                        Two of my hobbies are : {identity.hobbies[0]} and{" "}
+                        {identity.hobbies[1]}
+                    </li>
+                )
+            }
         </ul>
 
-        <p>My skills are: </p>
+        <p>My skills are:</p>
 
         <ul>
-            {skills.map((skill) => 
-                <li class="skill">{skill}</li>
-            )}
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
         </ul>
 
         {happy && <p>I'm happy to be learning Astro!</p>}
         {finished && <p>I've finished the Astro tutorial!</p>}
-        {goal === 3 ? 
-            <p>My goal is to finish 3 projects with Astro.</p> : 
-            <p>My goal is to finish {goal} projects with Astro.</p>
+        {
+            goal === 3 ? (
+                <p>My goal is to finish 3 projects with Astro.</p>
+            ) : (
+                <p>My goal is to finish {goal} projects with Astro.</p>
+            )
         }
-		<Footer/>
-	</body>
+        <Footer />
+        <script>
+            import "../scripts/menu.js";
+        </script>
+    </body>
 </html>
