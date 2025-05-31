@@ -1,0 +1,19 @@
+---
+import Social from "./Social.astro"
+const myWebsite = "https://www.soleil.sbs"
+---
+
+<style>
+    footer {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+</style>
+
+<footer>
+    <p>查看我的网站：<a href={myWebsite}>世界之初</a></p>
+    <Social platform="github" username="SaintFore" />
+    <Social platform="youtube" username="Augustus Saint" />
+</footer>
+
