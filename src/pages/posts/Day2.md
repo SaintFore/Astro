@@ -5,7 +5,7 @@ pubDate: 2025-05-29
 description: '域名与astro与机器学习'
 author: 'Merlin'
 image:
-    url: 'https://docs.astro.build/assets/rose.webp'
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day2.webp'
     alt: '这是一片虚无'
 tags: ['domain name','Machine Learning', 'astro', 'netlify', 'jsx']
 enclosure: 

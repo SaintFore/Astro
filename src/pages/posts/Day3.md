@@ -5,7 +5,7 @@ pubDate: 2025-05-30
 description: '一个被遗忘的一天'
 author: 'Merlin'
 image:
-    url: 'https://docs.astro.build/assets/rose.webp'
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day3.webp'
     alt: '这是一片虚无'
 tags: ['astro','blogging','learning in public']
 enclosure: 

@@ -5,7 +5,7 @@ pubDate: 2025-05-28
 description: 'vim使用与插件'
 author: 'Merlin'
 image:
-    url: 'https://docs.astro.build/assets/rose.webp'
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/202506011500111.webp'
     alt: '这是一片虚无'
 tags: ['vim']
 enclosure: 
