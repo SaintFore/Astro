@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
-title: 'My first'
-pubDate: 2025-05-29
+title: '再次出发'
+pubDate: 2025-05-28
 description: '这就是一个普通的文档'
 author: 'Merlin'
 image:
@@ -9,7 +9,6 @@ image:
     alt: '这是一片虚无'
 tags: ['learning in public','soleil']
 ---
-<img src='https://docs.astro.build/assets/rose.webp'/>
 # 5.28 Day 1
 
 <!-- vim-markdown-toc GFM -->
