@@ -8,12 +8,10 @@ image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
 tags: ['learning in public','soleil']
-enclosure: {
-    url: 'https://docs.astro.build/assets/rose.webp',
-    length: 0,
-    type: "image/webp",
-}
-
+enclosure:
+    url: 'https://docs.astro.build/assets/rose.webp'
+    length: 0
+    type: "image/webp"
 ---
 
 
