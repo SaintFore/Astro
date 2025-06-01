@@ -7,7 +7,7 @@ author: 'Merlin'
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
-tag: ['astro','blogging','learning in public']
+tags: ['astro']
 
 
 ---

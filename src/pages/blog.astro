@@ -11,8 +11,10 @@ const pageTitle = "My Blog";
 	<p>This is where I will post about my journey learning Astro.</p>
 
 	<ul>
-		{allPosts.map((post) => (
-			<BlogPost post={post} />
-		))}
+		{
+			allPosts.map((post: any) => (
+				<BlogPost url={post.url} title={post.frontmatter.title} />
+			))
+		}
 	</ul>
 </BaseLayout>
