@@ -8,18 +8,23 @@ image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
 tags: ['learning in public','soleil']
+enclosure: 
+    url: 'https://docs.astro.build/assets/rose.webp'
+    type: 'image/webp'
+    length: 1234
 ---
 # 5.28 Day 1
 
 <!-- vim-markdown-toc GFM -->
 
-* [配置vim](#配置vim)
-* [vim插件使用markdown](#vim插件使用markdown)
-* [vim使用](#vim使用)
-    * [折叠](#折叠)
-    * [撤销与返回](#撤销与返回)
-* [linux指令操作](#linux指令操作)
-* [markdown生成目录](#markdown生成目录)
+- [5.28 Day 1](#528-day-1)
+  - [配置vim](#配置vim)
+  - [vim插件使用markdown](#vim插件使用markdown)
+  - [vim使用](#vim使用)
+    - [折叠](#折叠)
+    - [撤销与返回](#撤销与返回)
+  - [linux指令操作](#linux指令操作)
+  - [markdown生成目录](#markdown生成目录)
 
 <!-- vim-markdown-toc -->
 
