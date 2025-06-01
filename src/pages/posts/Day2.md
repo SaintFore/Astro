@@ -2,25 +2,29 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Day2'
 pubDate: 2025-05-29
-description: '这就是一个普通的文档'
+description: '域名与astro与机器学习'
 author: 'Merlin'
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
-tags: ['astro']
-
-
+tags: ['domain name','Machine Learning', 'astro', 'netlify', 'jsx']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day2.webp'
+    type: 'image/webp'
+    length: 0
 ---
 
-# Day2
+# 5.29 Day2
 
 <!-- vim-markdown-toc GFM -->
 
-* [域名问题](#域名问题)
-    * [email forwading](#email-forwading)
-* [项目](#项目)
-* [机器学习·逻辑回归](#机器学习逻辑回归)
-* [astro和netlify](#astro和netlify)
+- [5.29 Day2](#529-day2)
+  - [域名问题](#域名问题)
+    - [email forwading](#email-forwading)
+  - [项目](#项目)
+  - [机器学习·逻辑回归](#机器学习逻辑回归)
+  - [astro和netlify](#astro和netlify)
+  - [什么是jsx？](#什么是jsx)
 
 <!-- vim-markdown-toc -->
 
@@ -102,5 +106,3 @@ loss就是针对单个的example的，而cost是loss的加和。
 确实很厉害啊。
 
 ## 什么是jsx？
-
-

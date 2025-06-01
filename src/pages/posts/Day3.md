@@ -8,17 +8,24 @@ image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
 tags: ['astro','blogging','learning in public']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day3.webp'
+    type: 'image/webp'
+    length: 0
 ---
+
+# 5.30 Day3
+
 <!-- vim-markdown-toc GFM -->
 
-* [一个未知的一天](#一个未知的一天)
-* [jsxlike](#jsxlike)
-* [css](#css)
-* [一些别的话语](#一些别的话语)
+- [5.30 Day3](#530-day3)
+  - [jsxlike](#jsxlike)
+  - [css](#css)
+  - [一些别的话语](#一些别的话语)
 
 <!-- vim-markdown-toc -->
 
-# 一个未知的一天
+**一个未知的一天**
 
 到底还是出现了我写日记经常出现的事情。
 
@@ -34,7 +41,7 @@ tags: ['astro','blogging','learning in public']
 
 休息是第一的，对于人生而言。
 
-# jsxlike
+## jsxlike
 
 这些其实都是我觉得自己可能做的事情。
 
@@ -44,7 +51,7 @@ tags: ['astro','blogging','learning in public']
 
 不过也有其他形式的使用js的方法，就是像是平常的前端写法，直接引入`<script></script>`。
 
-# css
+## css
 
 就是平常的写法，有全局的global，那就在src文件夹下面创建一个新的文件，放css的代码。
 
@@ -58,7 +65,7 @@ tags: ['astro','blogging','learning in public']
 
 之前我写的博客只是为了更加快捷的*查找*一些**我已经做的东西**。
 
-# 一些别的话语
+## 一些别的话语
 
 别的好像也就没了吧。
 

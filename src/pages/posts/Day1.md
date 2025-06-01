@@ -2,16 +2,16 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: '再次出发'
 pubDate: 2025-05-28
-description: '这就是一个普通的文档'
+description: 'vim使用与插件'
 author: 'Merlin'
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: '这是一片虚无'
-tags: ['learning in public','soleil']
+tags: ['vim']
 enclosure: 
-    url: 'https://docs.astro.build/assets/rose.webp'
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/202506011500111.webp'
     type: 'image/webp'
-    length: 1234
+    length: 0
 ---
 # 5.28 Day 1
 
