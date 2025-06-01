@@ -2,7 +2,6 @@
 const { frontmatter } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
 // console.log("frontmatter:", frontmatter);
-const tags = frontmatter.tags || [];
 // console.log("文章数量:", allPosts.length);
 // console.log("标签数量:", tags.length);
 ---
@@ -14,7 +13,7 @@ const tags = frontmatter.tags || [];
     <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     <div class="tags">
         {
-            tags.map((tag: String) => (
+            frontmatter.tags.map((tag: String) => (
                 <p class="tag">
                     <a href={`/tags/${tag}`}>{tag}</a>
                 </p>
