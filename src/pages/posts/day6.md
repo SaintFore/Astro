@@ -1,10 +1,28 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Day6'
+pubDate: 2025-06-02
+description: '继续Astro的学习'
+author: 'Merlin'
+image:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day6.webp'
+    alt: '这是一片虚无'
+tags: ['astro','github','vscode']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day6.webp'
+    type: 'image/webp'
+    length: 0
+---
+
 # 6.2 Day6
 
 <!-- vim-markdown-toc GFM -->
 
-* [github conflict](#github-conflict)
-* [Astro可以用其他框架](#astro可以用其他框架)
-* [前端部分](#前端部分)
+- [6.2 Day6](#62-day6)
+  - [github conflict](#github-conflict)
+  - [Astro可以用其他框架](#astro可以用其他框架)
+  - [前端部分](#前端部分)
+  - [VScode插件：Markdown All in One](#vscode插件markdown-all-in-one)
 
 <!-- vim-markdown-toc -->
 
@@ -45,3 +63,7 @@ Astro可以用其他的框架。
 我是有打算作为全栈工程师的，因为我想自己做一些东西出来。
 
 但是确实是知识太细碎了。
+
+## VScode插件：Markdown All in One
+
+保存的时候可以直接读取整个文件的TOC，生成TOC。

@@ -1,10 +1,27 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Day4'
+pubDate: 2025-05-31
+description: '继续Astro的学习'
+author: 'Merlin'
+image:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day4.webp'
+    alt: '这是一片虚无'
+tags: ['astro','wakatime']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day4.webp'
+    type: 'image/webp'
+    length: 0
+---
+
 # 5.31 Day4
 
 <!-- vim-markdown-toc GFM -->
 
-* [Astro的组件与布局](#astro的组件与布局)
-* [一些话语](#一些话语)
-    * [为什么要写这个](#为什么要写这个)
+- [5.31 Day4](#531-day4)
+  - [Astro的组件与布局](#astro的组件与布局)
+  - [一些话语](#一些话语)
+    - [为什么要写这个](#为什么要写这个)
 
 <!-- vim-markdown-toc -->
 

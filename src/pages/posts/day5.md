@@ -1,10 +1,27 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Day5'
+pubDate: 2025-06-01
+description: 'RSS和制卡'
+author: 'Merlin'
+image:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day5.webp'
+    alt: '这是一片虚无'
+tags: ['astro','RSS']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day5.webp'
+    type: 'image/webp'
+    length: 0
+---
+
 # 6.1 Day5
 
 <!-- vim-markdown-toc GFM -->
 
-* [RSS](#rss)
-    * [RSS封面](#rss封面)
-* [制卡](#制卡)
+- [6.1 Day5](#61-day5)
+  - [RSS](#rss)
+    - [RSS封面](#rss封面)
+  - [制卡](#制卡)
 
 <!-- vim-markdown-toc -->
 
