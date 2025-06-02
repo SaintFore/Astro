@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-
+import Greeting from "../../components/Greeting";
 const pageTitle = "标签列表";
 const allPosts = Object.values(
     import.meta.glob("../posts/*.md", { eager: true }),
@@ -20,6 +20,7 @@ const tags = [
             ))
         }
     </div>
+    <Greeting client:load message={["你好","早上好","晚上好","一天都好"]}/>
 </BaseLayout>
 
 <style>
