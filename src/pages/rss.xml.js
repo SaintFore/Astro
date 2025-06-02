@@ -2,7 +2,7 @@ import rss, { pagesGlobToRssItems } from '@astrojs/rss';
 
 export async function GET(context){
     return rss({
-        title: 'Astro Learner | Blog',
+        title: 'Soleil\'s Blog',
         description: '我的又一次尝试',
         site: context.site,
         items: await pagesGlobToRssItems(import.meta.glob('./**/*.md')),

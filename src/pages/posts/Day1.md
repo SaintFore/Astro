@@ -2,24 +2,29 @@
 layout: ../../layouts/MarkdownPostLayout.astro
 title: '再次出发'
 pubDate: 2025-05-28
-description: '这就是一个普通的文档'
+description: 'vim使用与插件'
 author: 'Merlin'
 image:
-    url: 'https://docs.astro.build/assets/rose.webp'
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/202506011500111.webp'
     alt: '这是一片虚无'
-tags: ['learning in public','soleil']
+tags: ['vim']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/202506011500111.webp'
+    type: 'image/webp'
+    length: 0
 ---
 # 5.28 Day 1
 
 <!-- vim-markdown-toc GFM -->
 
-* [配置vim](#配置vim)
-* [vim插件使用markdown](#vim插件使用markdown)
-* [vim使用](#vim使用)
-    * [折叠](#折叠)
-    * [撤销与返回](#撤销与返回)
-* [linux指令操作](#linux指令操作)
-* [markdown生成目录](#markdown生成目录)
+- [5.28 Day 1](#528-day-1)
+  - [配置vim](#配置vim)
+  - [vim插件使用markdown](#vim插件使用markdown)
+  - [vim使用](#vim使用)
+    - [折叠](#折叠)
+    - [撤销与返回](#撤销与返回)
+  - [linux指令操作](#linux指令操作)
+  - [markdown生成目录](#markdown生成目录)
 
 <!-- vim-markdown-toc -->
 
