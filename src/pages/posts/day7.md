@@ -1,3 +1,18 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Day7'
+pubDate: 2025-06-03
+description: '玩乐的一天'
+author: 'Merlin'
+image:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day7.webp'
+    alt: '这是一片虚无'
+tags: ['neural network','tensorflow','numpy']
+enclosure: 
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day7.webp'
+    type: 'image/webp'
+    length: 0
+---
 # 6.3 Day7
 
 我技术没怎么提升，近期。
