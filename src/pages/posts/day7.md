@@ -8,12 +8,25 @@ image:
     url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day7.webp'
     alt: '这是一片虚无'
 tags: ['neural network','tensorflow','numpy']
-enclosure: 
+enclosure:
     url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day7.webp'
     type: 'image/webp'
     length: 0
 ---
+
 # 6.3 Day7
+
+
+<!-- vim-markdown-toc GFM -->
+
+- [6.3 Day7](#63-day7)
+  - [Neural Networks](#neural-networks)
+    - [tensorflow](#tensorflow)
+    - [numpy](#numpy)
+  - [np.dot和np.matmul的区别](#npdot和npmatmul的区别)
+  - [广播](#广播)
+
+<!-- vim-markdown-toc -->
 
 我技术没怎么提升，近期。
 
