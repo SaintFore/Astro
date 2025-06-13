@@ -1,3 +1,18 @@
+---
+layout: ../../layouts/MarkdownPostLayout.astro
+title: 'Day7'
+pubDate: 2025-06-04
+description: '不知所谓的一天'
+author: 'Merlin'
+image:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day8.webp'
+    alt: '这是一片虚无'
+tags: ['Azure','Email']
+enclosure:
+    url: 'https://tree-1327913400.cos.ap-nanjing.myqcloud.com/imgs/Day8.webp'
+    type: 'image/webp'
+    length: 0
+---
 # 6.4 Day8
 
 <!-- vim-markdown-toc GFM -->
