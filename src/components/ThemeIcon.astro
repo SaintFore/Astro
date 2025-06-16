@@ -18,22 +18,74 @@
 
 <style>
     #themeToggle {
-        border: 0;
-        background: none;
+        border: none;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.8rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #themeToggle::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    #themeToggle:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1) rotate(10deg);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #themeToggle:hover::before {
+        opacity: 1;
+    }
+
+    #themeToggle svg {
+        transition: all 0.3s ease;
+    }
+
+    #themeToggle:hover svg {
+        transform: rotate(180deg);
     }
 
     .sun {
-        fill: black;
+        fill: white;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
     }
+    
     .moon {
         fill: transparent;
+        transition: all 0.3s ease;
+    }
+
+    :global(.dark) #themeToggle {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     :global(.dark) .sun {
         fill: transparent;
     }
+    
     :global(.dark) .moon {
         fill: white;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
     }
 </style>
 
