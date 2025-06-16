@@ -44,9 +44,10 @@
         const nav = document.querySelector('.nav-links');
         
         if (hamburger && nav && nav.parentElement) {
+            const navParent = nav.parentElement;
             hamburger.addEventListener('click', function() {
                 hamburger.classList.toggle('active');
-                nav.parentElement?.classList.toggle('expanded');
+                navParent.classList.toggle('expanded');
             });
         }
     });
