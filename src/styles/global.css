@@ -1,3 +1,6 @@
+/* 导入现代字体 - 必须放在最顶部 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* 现代化CSS重置和基础样式 */
 :root {
     /* 现代化颜色系统 */
@@ -39,9 +42,6 @@
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
-
-/* 导入现代字体 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 html {
     background: var(--gradient-primary);
