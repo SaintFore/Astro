@@ -36,13 +36,13 @@ enclosure:
 
 也就是：
 
-```git
+```bash
 git config pull.rebase false
 ```
 
 小白用merge就行了。
 
-```git
+```bash
 git pull origin master
 ```
 
