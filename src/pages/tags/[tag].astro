@@ -22,18 +22,617 @@ export async function getStaticPaths() {
         };
     });
 }
+
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-// console.log("参数:", Astro.params, "\n数据:",Astro.props)
+
+// 按日期排序文章
+const sortedPosts = posts.sort((a: any, b: any) => 
+    new Date(b.frontmatter.pubDate || b.frontmatter.date || 0).getTime() - 
+    new Date(a.frontmatter.pubDate || a.frontmatter.date || 0).getTime()
+);
+
+const pageTitle = `Tag: ${tag}`;
 ---
 
-<BaseLayout pageTitle={tag}>
-    <p>{tag}页面</p>
-    <ul>
-        {
-            posts.map((post: any) => (
-                <BlogPost url={post.url} title={post.frontmatter.title} />
-            ))
-        }
-    </ul>
+<BaseLayout pageTitle={pageTitle}>
+    <div class="tag-page">
+        <!-- 隐藏默认标题 -->
+        <style>
+            .page-header {
+                display: none !important;
+            }
+        </style>
+
+        <!-- 页面头部 -->
+        <header class="header">
+            <div class="header-content">
+                <nav class="breadcrumb">
+                    <a href="/tags" class="breadcrumb-link">TAGS</a>
+                    <span class="breadcrumb-divider">/</span>
+                    <span class="breadcrumb-current">{tag.toUpperCase()}</span>
+                </nav>
+                
+                <div class="title-section">
+                    <h1 class="tag-title">{tag}</h1>
+                    <div class="meta">
+                        <span class="post-count">{sortedPosts.length} {sortedPosts.length === 1 ? 'POST' : 'POSTS'}</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 文章列表 -->
+        <main class="posts-container">
+            <div class="posts-grid">
+                {
+                    sortedPosts.map((post: any, index: number) => {
+                        const pubDate = post.frontmatter.pubDate || post.frontmatter.date;
+                        const formattedDate = pubDate ? new Date(pubDate).toLocaleDateString('zh-CN', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        }).replace(/\//g, '.') : '';
+                        
+                        return (
+                            <article class="post-card" style={`animation-delay: ${index * 0.1}s`}>
+                                <div class="post-index">
+                                    {String(index + 1).padStart(2, '0')}
+                                </div>
+                                <div class="post-content">
+                                    <div class="post-meta">
+                                        {formattedDate && (
+                                            <time class="post-date" datetime={pubDate}>
+                                                {formattedDate}
+                                            </time>
+                                        )}
+                                    </div>
+                                    <h2 class="post-title">
+                                        <a href={post.url} class="post-link">
+                                            {post.frontmatter.title}
+                                        </a>
+                                    </h2>
+                                    {post.frontmatter.description && (
+                                        <p class="post-description">
+                                            {post.frontmatter.description}
+                                        </p>
+                                    )}
+                                    <div class="post-tags">
+                                        {post.frontmatter.tags?.map((postTag: string) => (
+                                            <span class={`tag ${postTag === tag ? 'tag-current' : ''}`}>
+                                                {postTag === tag ? postTag : (
+                                                    <a href={`/tags/${postTag}`}>{postTag}</a>
+                                                )}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    })
+                }
+            </div>
+        </main>
+    </div>
 </BaseLayout>
+
+<style>
+    /* 页面容器 */
+    .tag-page {
+        min-height: 100vh;
+        background: 
+            radial-gradient(ellipse at top, rgba(16, 24, 39, 0.02) 0%, transparent 50%),
+            linear-gradient(180deg, rgba(247, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.5) 100%);
+        animation: pageEnter 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes pageEnter {
+        from { 
+            opacity: 0; 
+            transform: translateY(20px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+    }
+
+    /* 页面头部 */
+    .header {
+        padding: 4rem 2rem 3rem;
+        text-align: center;
+        position: relative;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        margin-bottom: 4rem;
+    }
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 2rem;
+        background: linear-gradient(to bottom, transparent, rgba(15, 23, 42, 0.3), transparent);
+        animation: lineGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
+    @keyframes lineGrow {
+        from { height: 0; }
+        to { height: 2rem; }
+    }
+
+    .header-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* 面包屑导航 */
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-bottom: 2.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        animation: breadcrumbSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    @keyframes breadcrumbSlide {
+        from { 
+            opacity: 0; 
+            transform: translateY(15px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+    }
+
+    .breadcrumb-link {
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .breadcrumb-link:hover {
+        color: #1e293b;
+    }
+
+    .breadcrumb-divider {
+        color: #cbd5e1;
+        font-weight: 300;
+    }
+
+    .breadcrumb-current {
+        color: #1e293b;
+        font-weight: 600;
+    }
+
+    /* 标题区域 */
+    .title-section {
+        animation: titleSlide 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    }
+
+    @keyframes titleSlide {
+        from { 
+            opacity: 0; 
+            transform: translateY(20px) scale(0.98);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .tag-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 200;
+        letter-spacing: 0.05em;
+        color: #0f172a;
+        margin: 0 0 1rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        position: relative;
+    }
+
+    .tag-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3rem;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #1e293b, transparent);
+        animation: underlineGrow 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+    }
+
+    @keyframes underlineGrow {
+        from { width: 0; }
+        to { width: 3rem; }
+    }
+
+    .meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .post-count {
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+
+    /* 文章容器 */
+    .posts-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem 6rem;
+    }
+
+    .posts-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        background: rgba(15, 23, 42, 0.04);
+        border-radius: 2px;
+        overflow: hidden;
+        animation: gridFade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+    }
+
+    @keyframes gridFade {
+        from { 
+            opacity: 0; 
+            transform: translateY(30px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+    }
+
+    /* 文章卡片 */
+    .post-card {
+        background: #ffffff;
+        display: flex;
+        align-items: flex-start;
+        gap: 2rem;
+        padding: 2.5rem;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        animation: cardSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes cardSlide {
+        from { 
+            opacity: 0; 
+            transform: translateX(-20px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateX(0);
+        }
+    }
+
+    .post-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(15, 23, 42, 0.01);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+
+    .post-card:hover::before {
+        opacity: 1;
+    }
+
+    .post-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 
+            0 20px 25px -5px rgba(0, 0, 0, 0.08),
+            0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    }
+
+    /* 文章索引 */
+    .post-index {
+        font-size: 1.5rem;
+        font-weight: 200;
+        color: #cbd5e1;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+        width: 3rem;
+        text-align: right;
+        margin-top: 0.25rem;
+        position: relative;
+        z-index: 2;
+        transition: color 0.3s ease;
+    }
+
+    .post-card:hover .post-index {
+        color: #64748b;
+    }
+
+    /* 文章内容 */
+    .post-content {
+        flex: 1;
+        position: relative;
+        z-index: 2;
+    }
+
+    .post-meta {
+        margin-bottom: 0.5rem;
+    }
+
+    .post-date {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .post-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.3;
+        margin: 0 0 1rem;
+        color: #1e293b;
+    }
+
+    .post-link {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+        position: relative;
+    }
+
+    .post-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #1e293b;
+        transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .post-card:hover .post-link::after {
+        width: 100%;
+    }
+
+    .post-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #64748b;
+        margin: 0 0 1.5rem;
+    }
+
+    /* 标签 */
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-radius: 0.25rem;
+        transition: all 0.3s ease;
+    }
+
+    .tag:not(.tag-current) {
+        background: rgba(15, 23, 42, 0.05);
+        color: #64748b;
+    }
+
+    .tag:not(.tag-current):hover {
+        background: rgba(15, 23, 42, 0.1);
+        color: #1e293b;
+    }
+
+    .tag:not(.tag-current) a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .tag-current {
+        background: #1e293b;
+        color: #ffffff;
+    }
+
+    /* 深色模式 */
+    :global(.dark) .tag-page {
+        background: 
+            radial-gradient(ellipse at top, rgba(239, 246, 255, 0.03) 0%, transparent 50%),
+            linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(7, 15, 31, 0.98) 100%);
+    }
+
+    :global(.dark) .header {
+        border-bottom-color: rgba(241, 245, 249, 0.08);
+    }
+
+    :global(.dark) .header::before {
+        background: linear-gradient(to bottom, transparent, rgba(241, 245, 249, 0.3), transparent);
+    }
+
+    :global(.dark) .breadcrumb-link {
+        color: #94a3b8;
+    }
+
+    :global(.dark) .breadcrumb-link:hover {
+        color: #e2e8f0;
+    }
+
+    :global(.dark) .breadcrumb-divider {
+        color: #475569;
+    }
+
+    :global(.dark) .breadcrumb-current {
+        color: #f1f5f9;
+    }
+
+    :global(.dark) .tag-title {
+        color: #f8fafc;
+    }
+
+    :global(.dark) .tag-title::after {
+        background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    }
+
+    :global(.dark) .post-count {
+        color: #94a3b8;
+    }
+
+    :global(.dark) .posts-grid {
+        background: rgba(241, 245, 249, 0.03);
+    }
+
+    :global(.dark) .post-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(8px);
+    }
+
+    :global(.dark) .post-card::before {
+        background: rgba(241, 245, 249, 0.02);
+    }
+
+    :global(.dark) .post-index {
+        color: #475569;
+    }
+
+    :global(.dark) .post-card:hover .post-index {
+        color: #94a3b8;
+    }
+
+    :global(.dark) .post-date {
+        color: #64748b;
+    }
+
+    :global(.dark) .post-title {
+        color: #f1f5f9;
+    }
+
+    :global(.dark) .post-link::after {
+        background: #e2e8f0;
+    }
+
+    :global(.dark) .post-description {
+        color: #94a3b8;
+    }
+
+    :global(.dark) .tag:not(.tag-current) {
+        background: rgba(241, 245, 249, 0.08);
+        color: #94a3b8;
+    }
+
+    :global(.dark) .tag:not(.tag-current):hover {
+        background: rgba(241, 245, 249, 0.15);
+        color: #e2e8f0;
+    }
+
+    :global(.dark) .tag-current {
+        background: #f1f5f9;
+        color: #1e293b;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .header {
+            padding: 3rem 1rem 2rem;
+        }
+
+        .tag-title {
+            font-size: clamp(2rem, 8vw, 2.5rem);
+        }
+
+        .posts-container {
+            padding: 0 1rem 4rem;
+        }
+
+        .post-card {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .post-index {
+            width: auto;
+            text-align: left;
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        .post-title {
+            font-size: 1.25rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.75rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header {
+            padding: 2rem 1rem 1.5rem;
+        }
+
+        .post-card {
+            padding: 1.5rem;
+        }
+
+        .post-tags {
+            gap: 0.25rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+        }
+    }
+
+    /* 性能优化 */
+    .post-card {
+        will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .tag-page,
+        .header::before,
+        .breadcrumb,
+        .title-section,
+        .tag-title::after,
+        .posts-grid,
+        .post-card {
+            animation: none;
+        }
+        
+        .post-card,
+        .post-link::after {
+            transition: none;
+        }
+    }
+</style>
