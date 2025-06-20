@@ -13,17 +13,12 @@ const { pageTitle } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<div class="animated-bg">
-			<div class="floating-shapes">
-				<div class="shape shape-1"></div>
-				<div class="shape shape-2"></div>
-				<div class="shape shape-3"></div>
-				<div class="shape shape-4"></div>
-				<div class="shape shape-5"></div>
-			</div>
+		<div class="stark-bg">
+			<div class="grid-overlay"></div>
+			<div class="scan-lines"></div>
 		</div>
 		
 		<div class="page-container">
@@ -31,7 +26,7 @@ const { pageTitle } = Astro.props;
 			<main class="main-content">
 				<div class="page-header">
 					<h1 class="page-title">{pageTitle}</h1>
-					<div class="title-decoration"></div>
+					<div class="title-line"></div>
 				</div>
 				<div class="content-wrapper">
 					<slot />
@@ -45,97 +40,45 @@ const { pageTitle } = Astro.props;
 		</script>
 		
 		<style>
-			/* 炫酷动画背景 */
-			.animated-bg {
+			/* 冷峻美学背景 */
+			.stark-bg {
 				position: fixed;
 				top: 0;
 				left: 0;
 				width: 100%;
 				height: 100%;
 				z-index: -1;
-				background: linear-gradient(
-					135deg,
-					#667eea 0%,
-					#764ba2 25%,
-					#f093fb 50%,
-					#f5576c 75%,
-					#4facfe 100%
-				);
-				background-size: 400% 400%;
-				animation: gradientShift 15s ease infinite;
+				background: 
+					radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+					radial-gradient(circle at 70% 80%, rgba(147, 197, 253, 0.05) 0%, transparent 40%),
+					linear-gradient(180deg, #0f172a 0%, #1e293b 35%, #334155 100%);
 			}
 
-			.animated-bg::before {
-				content: '';
+			.grid-overlay {
 				position: absolute;
 				top: 0;
 				left: 0;
 				width: 100%;
 				height: 100%;
-				background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-							radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-							radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
-				animation: pulseGlow 8s ease-in-out infinite alternate;
+				background-image: 
+					linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+				background-size: 40px 40px;
+				animation: gridPulse 4s ease-in-out infinite;
 			}
 
-			/* 浮动形状 */
-			.floating-shapes {
+			.scan-lines {
 				position: absolute;
+				top: 0;
+				left: 0;
 				width: 100%;
 				height: 100%;
-				overflow: hidden;
-			}
-
-			.shape {
-				position: absolute;
-				border-radius: 50%;
-				opacity: 0.1;
-				animation: float 20s infinite linear;
-			}
-
-			.shape-1 {
-				width: 100px;
-				height: 100px;
-				background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-				top: 20%;
-				left: 10%;
-				animation-delay: 0s;
-			}
-
-			.shape-2 {
-				width: 150px;
-				height: 150px;
-				background: linear-gradient(45deg, #a8edea, #fed6e3);
-				top: 60%;
-				right: 10%;
-				animation-delay: -5s;
-			}
-
-			.shape-3 {
-				width: 80px;
-				height: 80px;
-				background: linear-gradient(45deg, #ffecd2, #fcb69f);
-				top: 10%;
-				right: 30%;
-				animation-delay: -10s;
-			}
-
-			.shape-4 {
-				width: 120px;
-				height: 120px;
-				background: linear-gradient(45deg, #667eea, #764ba2);
-				bottom: 20%;
-				left: 20%;
-				animation-delay: -15s;
-			}
-
-			.shape-5 {
-				width: 60px;
-				height: 60px;
-				background: linear-gradient(45deg, #f093fb, #f5576c);
-				top: 40%;
-				left: 50%;
-				animation-delay: -8s;
+				background: linear-gradient(
+					transparent 50%,
+					rgba(59, 130, 246, 0.03) 50%
+				);
+				background-size: 100% 4px;
+				animation: scanMove 2s linear infinite;
 			}
 
 			/* 页面容器 */
@@ -143,10 +86,12 @@ const { pageTitle } = Astro.props;
 				position: relative;
 				z-index: 1;
 				min-height: 100vh;
-				backdrop-filter: blur(10px);
-				background: rgba(255, 255, 255, 0.1);
-				border: 1px solid rgba(255, 255, 255, 0.2);
-				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+				background: rgba(15, 23, 42, 0.4);
+				backdrop-filter: blur(20px);
+				border: 1px solid rgba(59, 130, 246, 0.2);
+				box-shadow: 
+					0 0 50px rgba(59, 130, 246, 0.1),
+					inset 0 1px 0 rgba(59, 130, 246, 0.1);
 			}
 
 			.main-content {
@@ -162,89 +107,106 @@ const { pageTitle } = Astro.props;
 			}
 
 			.page-title {
-				font-family: 'Inter', sans-serif;
+				font-family: 'JetBrains Mono', monospace;
 				font-size: clamp(2.5rem, 5vw, 4rem);
-				font-weight: 700;
-				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-				-webkit-background-clip: text;
-				background-clip: text;
-				-webkit-text-fill-color: transparent;
+				font-weight: 600;
+				color: #e2e8f0;
 				margin: 1rem 0;
-				text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
-				animation: titleGlow 3s ease-in-out infinite alternate;
+				text-shadow: 
+					0 0 20px rgba(59, 130, 246, 0.5),
+					0 0 40px rgba(59, 130, 246, 0.3);
+				letter-spacing: -0.02em;
+				position: relative;
 			}
 
-			.title-decoration {
+			.page-title::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(59, 130, 246, 0.1),
+					transparent
+				);
+				animation: titleScan 3s ease-in-out infinite;
+			}
+
+			.title-line {
 				width: 100px;
-				height: 4px;
-				background: linear-gradient(90deg, #667eea, #764ba2);
+				height: 2px;
+				background: linear-gradient(90deg, transparent, #3b82f6, transparent);
 				margin: 1rem auto;
-				border-radius: 2px;
 				position: relative;
 				overflow: hidden;
 			}
 
-			.title-decoration::after {
+			.title-line::after {
 				content: '';
 				position: absolute;
 				top: 0;
 				left: -100%;
 				width: 100%;
 				height: 100%;
-				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-				animation: shimmer 2s infinite;
+				background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+				animation: lineSweep 2s ease-in-out infinite;
 			}
 
 			.content-wrapper {
-				background: rgba(255, 255, 255, 0.05);
-				border-radius: 20px;
+				background: rgba(15, 23, 42, 0.6);
+				border: 1px solid rgba(59, 130, 246, 0.2);
+				border-radius: 0;
 				padding: 2rem;
-				backdrop-filter: blur(20px);
-				border: 1px solid rgba(255, 255, 255, 0.1);
+				backdrop-filter: blur(10px);
 				box-shadow: 
-					0 8px 32px rgba(0, 0, 0, 0.1),
-					inset 0 1px 0 rgba(255, 255, 255, 0.2);
-				animation: contentFadeIn 1s ease-out;
+					0 0 30px rgba(59, 130, 246, 0.1),
+					inset 0 1px 0 rgba(59, 130, 246, 0.1);
+				position: relative;
+				overflow: hidden;
+			}
+
+			.content-wrapper::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 1px;
+				background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+			}
+
+			.content-wrapper::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 1px;
+				background: linear-gradient(90deg, transparent, #3b82f6, transparent);
 			}
 
 			/* 动画定义 */
-			@keyframes gradientShift {
-				0% { background-position: 0% 50%; }
-				50% { background-position: 100% 50%; }
-				100% { background-position: 0% 50%; }
+			@keyframes gridPulse {
+				0%, 100% { opacity: 0.3; }
+				50% { opacity: 0.6; }
 			}
 
-			@keyframes pulseGlow {
-				0% { opacity: 0.5; transform: scale(1); }
-				100% { opacity: 0.8; transform: scale(1.1); }
+			@keyframes scanMove {
+				0% { transform: translateY(-100%); }
+				100% { transform: translateY(100vh); }
 			}
 
-			@keyframes float {
-				0% { transform: translateY(0px) rotate(0deg); }
-				33% { transform: translateY(-30px) rotate(120deg); }
-				66% { transform: translateY(30px) rotate(240deg); }
-				100% { transform: translateY(0px) rotate(360deg); }
+			@keyframes titleScan {
+				0%, 100% { transform: translateX(-100%); opacity: 0; }
+				50% { transform: translateX(100%); opacity: 1; }
 			}
 
-			@keyframes titleGlow {
-				0% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
-				100% { text-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 60px rgba(118, 75, 162, 0.6); }
-			}
-
-			@keyframes shimmer {
+			@keyframes lineSweep {
 				0% { left: -100%; }
 				100% { left: 100%; }
-			}
-
-			@keyframes contentFadeIn {
-				0% { 
-					opacity: 0; 
-					transform: translateY(30px); 
-				}
-				100% { 
-					opacity: 1; 
-					transform: translateY(0); 
-				}
 			}
 
 			/* 响应式设计 */
@@ -255,30 +217,29 @@ const { pageTitle } = Astro.props;
 				
 				.content-wrapper {
 					padding: 1.5rem;
-					border-radius: 15px;
 				}
 				
-				.shape {
-					opacity: 0.05;
+				.grid-overlay {
+					background-size: 20px 20px;
 				}
 			}
 
-			/* 暗色模式适配 */
+			/* 暗色模式优化 */
 			:global(html.dark) .page-container {
-				background: rgba(30, 41, 59, 0.2);
-				border: 1px solid rgba(255, 255, 255, 0.1);
+				background: rgba(15, 23, 42, 0.8);
+				border: 1px solid rgba(59, 130, 246, 0.3);
 			}
 
 			:global(html.dark) .content-wrapper {
-				background: rgba(30, 41, 59, 0.1);
-				border: 1px solid rgba(255, 255, 255, 0.05);
+				background: rgba(15, 23, 42, 0.9);
+				border: 1px solid rgba(59, 130, 246, 0.3);
 			}
 
 			:global(html.dark) .page-title {
-				background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-				-webkit-background-clip: text;
-				background-clip: text;
-				-webkit-text-fill-color: transparent;
+				color: #f1f5f9;
+				text-shadow: 
+					0 0 30px rgba(59, 130, 246, 0.7),
+					0 0 60px rgba(59, 130, 246, 0.5);
 			}
 		</style>
 	</body>

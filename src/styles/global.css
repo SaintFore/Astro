@@ -1,65 +1,71 @@
-/* 导入现代字体 - 必须放在最顶部 */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* 导入冷峻美学字体 */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* 现代化CSS重置和基础样式 */
+/* 冷峻美学CSS变量 */
 :root {
-    /* 现代化颜色系统 */
-    --primary-50: #f0f9ff;
-    --primary-100: #e0f2fe;
-    --primary-500: #0ea5e9;
-    --primary-600: #0284c7;
-    --primary-700: #0369a1;
-    --primary-900: #0c4a6e;
+    /* 冷峻色彩系统 */
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
     
-    /* 中性色调 */
-    --neutral-50: #fafafa;
-    --neutral-100: #f5f5f5;
-    --neutral-200: #e5e5e5;
-    --neutral-300: #d4d4d4;
-    --neutral-400: #a3a3a3;
-    --neutral-500: #737373;
-    --neutral-600: #525252;
-    --neutral-700: #404040;
-    --neutral-800: #262626;
-    --neutral-900: #171717;
+    /* 蓝色系统 */
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-300: #93c5fd;
+    --blue-400: #60a5fa;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
     
-    /* 渐变色 */
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    /* 冷峻渐变 */
+    --gradient-cold: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--slate-700) 100%);
+    --gradient-blue: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-500) 100%);
+    --gradient-steel: linear-gradient(135deg, var(--slate-600) 0%, var(--slate-500) 100%);
     
-    /* 阴影系统 */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    /* 冷峻阴影系统 */
+    --shadow-cold-sm: 0 1px 2px 0 rgba(59, 130, 246, 0.1);
+    --shadow-cold-md: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -2px rgba(59, 130, 246, 0.1);
+    --shadow-cold-lg: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -4px rgba(59, 130, 246, 0.1);
+    --shadow-cold-xl: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
     
-    /* 动画缓动 */
-    --ease-in-out-cubic: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-out-cubic: cubic-bezier(0, 0, 0.2, 1);
-    
-    /* 字体系统 */
+    /* 冷峻字体系统 */
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    
+    /* 冷峻动画 */
+    --ease-cold: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 html {
-    background: var(--gradient-primary);
+    background: var(--gradient-cold);
     background-attachment: fixed;
     font-family: var(--font-sans);
     scroll-behavior: smooth;
     font-size: 16px;
     line-height: 1.6;
+    color: var(--slate-200);
 }
 
 html.dark {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--slate-700) 100%);
     background-attachment: fixed;
-    color: var(--neutral-100);
+    color: var(--slate-100);
 }
 
 .dark .nav-links a {
-    color: var(--neutral-100);
+    color: var(--slate-100);
 }
 
 /* 全局重置 */
@@ -76,7 +82,7 @@ body {
     font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.6;
-    color: var(--neutral-800);
+    color: var(--slate-200);
     background: transparent;
     min-height: 100vh;
     display: flex;
@@ -84,18 +90,172 @@ body {
 }
 
 html.dark body {
-    color: var(--neutral-100);
+    color: var(--slate-100);
 }
 
-/* 现代化主内容区域 */
-main {
-    flex: 1;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    min-height: calc(100vh - 200px);
+/* 冷峻美学全局样式 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--slate-100);
+    letter-spacing: -0.02em;
+    text-shadow: var(--shadow-glow);
+}
+
+p {
+    color: var(--slate-300);
+    line-height: 1.7;
+}
+
+a {
+    color: var(--blue-400);
+    text-decoration: none;
+    transition: all 0.3s var(--ease-cold);
     position: relative;
+}
+
+a:hover {
+    color: var(--blue-300);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gradient-blue);
+    transition: width 0.3s var(--ease-cold);
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+code {
+    font-family: var(--font-mono);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 0.2em 0.4em;
+    border-radius: 2px;
+    color: var(--blue-300);
+    font-size: 0.9em;
+}
+
+pre {
+    background: var(--slate-900);
+    border: 1px solid var(--blue-600);
+    border-radius: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    position: relative;
+}
+
+pre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-blue);
+}
+
+blockquote {
+    border-left: 3px solid var(--blue-500);
+    background: rgba(59, 130, 246, 0.05);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    color: var(--slate-300);
+    position: relative;
+}
+
+blockquote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gradient-blue);
+}
+
+/* 冷峻美学按钮样式 */
+.btn-cold {
+    background: transparent;
+    border: 1px solid var(--blue-500);
+    color: var(--blue-400);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-cold);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+    transition: left 0.5s var(--ease-cold);
+}
+
+.btn-cold:hover {
+    border-color: var(--blue-400);
+    color: var(--blue-300);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-cold:hover::before {
+    left: 100%;
+}
+
+/* 冷峻美学输入框 */
+input, textarea {
+    background: var(--slate-800);
+    border: 1px solid var(--slate-600);
+    color: var(--slate-200);
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    transition: all 0.3s var(--ease-cold);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--blue-500);
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--slate-800);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue-600);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-500);
+}
+
+/* 选中文本样式 */
+::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: var(--slate-100);
 }
 
 /* 内容包装器 - 使用更现代的宽度管理 */
@@ -410,6 +570,180 @@ html.dark a:hover {
         background: rgba(255, 255, 255, 0.15);
         color: var(--neutral-100);
     }
+}
+
+/* 冷峻美学主内容区域 */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 200px);
+    position: relative;
+}
+
+/* 冷峻美学卡片样式 */
+.stark-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.3s var(--ease-cold);
+    position: relative;
+    overflow: hidden;
+}
+
+.stark-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-500), transparent);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease-cold);
+}
+
+.stark-card:hover {
+    border-color: var(--blue-400);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.stark-card:hover::before {
+    opacity: 1;
+}
+
+/* 博客文章样式 */
+article {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s var(--ease-cold);
+}
+
+article:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: var(--shadow-cold-lg);
+}
+
+/* 导航链接样式 */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+}
+
+.nav-links a {
+    color: var(--slate-300);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s var(--ease-cold);
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--blue-300);
+    border-color: var(--blue-500);
+    box-shadow: var(--shadow-glow);
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(59, 130, 246, 0.1);
+    transition: width 0.3s var(--ease-cold);
+    z-index: -1;
+}
+
+.nav-links a:hover::before {
+    width: 100%;
+}
+
+/* 冷峻美学表格 */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    margin: 2rem 0;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    color: var(--slate-200);
+}
+
+th {
+    background: rgba(59, 130, 246, 0.1);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    color: var(--blue-300);
+}
+
+tr:hover {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+/* 冷峻美学列表 */
+ul, ol {
+    color: var(--slate-300);
+}
+
+li {
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+ul li::marker {
+    color: var(--blue-400);
+}
+
+ol li::marker {
+    color: var(--blue-400);
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+/* 冷峻美学分隔线 */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-500), transparent);
+    margin: 2rem 0;
+    position: relative;
+}
+
+hr::after {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--slate-900);
+    color: var(--blue-400);
+    padding: 0 1rem;
+    font-family: var(--font-mono);
 }
 
 /* 现代化卡片和内容组件 */
