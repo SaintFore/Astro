@@ -38,10 +38,9 @@
     --shadow-cold-lg: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -4px rgba(59, 130, 246, 0.1);
     --shadow-cold-xl: 0 20px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
     --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
-    
-    /* 冷峻字体系统 */
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      /* 冷峻字体系统 */
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Microsoft YaHei Mono', '微软雅黑', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', 'Source Han Sans SC', 'Noto Sans CJK SC', sans-serif;
     
     /* 冷峻动画 */
     --ease-cold: cubic-bezier(0.25, 0.46, 0.45, 0.94);
