@@ -1,309 +1,532 @@
 ---
 const { frontmatter } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
-// console.log("frontmatter:", frontmatter);
-// console.log("文章数量:", allPosts.length);
-// console.log("标签数量:", tags.length);
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
     <article class="post-container">
-        <!-- 文章头部区域 -->
-        <header class="post-header">
-            <div class="post-meta">
-                <time class="post-date" datetime={frontmatter.pubDate}>
-                    <span class="date-icon">📅</span>
-                    {frontmatter.pubDate.toString().slice(0, 10)}
-                </time>
-                <div class="author-info">
-                    <span class="author-icon">✍️</span>
-                    <span class="author-name">{frontmatter.author}</span>
+        <!-- 文章元数据栏 -->
+        <aside class="post-sidebar">
+            <div class="post-meta-card">
+                <div class="meta-header">
+                    <div class="meta-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                    </div>
+                    <span class="meta-label">META</span>
+                </div>
+                
+                <div class="meta-items">
+                    <div class="meta-item">
+                        <span class="meta-key">DATE</span>
+                        <time class="meta-value" datetime={frontmatter.pubDate}>
+                            {frontmatter.pubDate.toString().slice(0, 10)}
+                        </time>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <span class="meta-key">AUTHOR</span>
+                        <span class="meta-value">{frontmatter.author}</span>
+                    </div>
+                    
+                    <div class="meta-item">
+                        <span class="meta-key">READING</span>
+                        <span class="meta-value">~5 MIN</span>
+                    </div>
                 </div>
             </div>
-            
-            <p class="post-description">{frontmatter.description}</p>
-            
-            <!-- 特色图片 -->
-            <div class="featured-image">
-                <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
-                <div class="image-overlay"></div>
-            </div>
-            
-            <!-- 标签区域 -->
-            <div class="tags-container">
-                <h3 class="tags-title">🏷️ 标签</h3>
-                <div class="tags">
-                    {
-                        frontmatter.tags.map((tag: String) => (
-                            <a href={`/tags/${tag}`} class="tag">
-                                <span class="tag-text">{tag}</span>
-                                <span class="tag-hover">#{tag}</span>
-                            </a>
-                        ))
-                    }
-                </div>
-            </div>
-        </header>
 
-        <!-- 文章内容 -->
-        <main class="post-content">
-            <slot />
-        </main>
+            <!-- 标签系统 -->
+            <div class="tags-card">
+                <div class="tags-header">
+                    <div class="tags-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+                            <line x1="7" y1="7" x2="7.01" y2="7"/>
+                        </svg>
+                    </div>
+                    <span class="tags-label">TAGS</span>
+                </div>
+                
+                <div class="tags-list">
+                    {frontmatter.tags.map((tag: String) => (
+                        <a href={`/tags/${tag}`} class="tag-chip">
+                            <span class="tag-hash">#</span>
+                            <span class="tag-name">{tag}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主要内容区域 -->
+        <div class="post-main">
+            <!-- 文章头部 -->
+            <header class="post-header">
+                <div class="post-title-section">
+                    <h1 class="post-title">{frontmatter.title}</h1>
+                    <div class="title-underline"></div>
+                </div>
+                
+                {frontmatter.description && (
+                    <p class="post-description">{frontmatter.description}</p>
+                )}
+                
+                {frontmatter.image && (
+                    <div class="featured-image">
+                        <div class="image-frame">
+                            <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+                            <div class="image-scan-line"></div>
+                        </div>
+                        <div class="image-caption">
+                            <span class="caption-label">FEATURED</span>
+                            <span class="caption-text">{frontmatter.image.alt}</span>
+                        </div>
+                    </div>
+                )}
+            </header>
+
+            <!-- 文章内容 -->
+            <main class="post-content">
+                <div class="content-wrapper">
+                    <slot />
+                </div>
+            </main>
+        </div>
     </article>
 </BaseLayout>
 
 <style>
+    /* 冷峻美学博客布局 */
     .post-container {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 4rem;
+        padding: 2rem 1rem;
         position: relative;
     }
 
-    /* 文章头部样式 */
-    .post-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        color: white;
+    /* 侧边栏样式 */
+    .post-sidebar {
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    /* 元数据卡片 */
+    .post-meta-card, .tags-card {
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid var(--slate-700);
+        border-radius: 2px;
+        backdrop-filter: blur(10px);
         position: relative;
         overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
 
-    .post-header::before {
+    .post-meta-card::before, .tags-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        pointer-events: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--blue-500), transparent);
+        animation: scan 3s linear infinite;
     }
 
-    .post-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        flex-wrap: wrap;
-        gap: 1rem;
+    @keyframes scan {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
     }
 
-    .post-date, .author-info {
+    .meta-header, .tags-header {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 0.9rem;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        backdrop-filter: blur(10px);
+        padding: 1rem 1rem 0.5rem;
+        border-bottom: 1px solid var(--slate-800);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--blue-400);
+        letter-spacing: 0.1em;
+    }
+
+    .meta-icon, .tags-icon {
+        color: var(--blue-500);
+    }
+
+    .meta-items {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .meta-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+    }
+
+    .meta-key {
+        color: var(--slate-400);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+    }
+
+    .meta-value {
+        color: var(--slate-200);
+        font-weight: 400;
+    }
+
+    /* 标签样式 */
+    .tags-list {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .tag-chip {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 2px;
+        color: var(--blue-300);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: all 0.3s var(--ease-cold);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tag-chip::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+        transition: left 0.5s var(--ease-cold);
+    }
+
+    .tag-chip:hover::before {
+        left: 100%;
+    }
+
+    .tag-chip:hover {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: var(--blue-400);
+        color: var(--blue-200);
+        transform: translateX(4px);
+    }
+
+    .tag-hash {
+        color: var(--blue-500);
+        font-weight: 700;
+    }
+
+    /* 主内容区域 */
+    .post-main {
+        min-width: 0; /* 防止 flexbox 溢出 */
+    }
+
+    /* 文章头部 */
+    .post-header {
+        margin-bottom: 3rem;
+    }
+
+    .post-title-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .post-title {
+        font-family: var(--font-mono);
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-weight: 700;
+        color: var(--slate-100);
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin: 0;
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        background: linear-gradient(135deg, var(--slate-100), var(--blue-200));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .title-underline {
+        height: 2px;
+        width: 100px;
+        background: var(--gradient-blue);
+        margin-top: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .title-underline::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: shimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
     }
 
     .post-description {
         font-size: 1.2rem;
+        color: var(--slate-400);
+        line-height: 1.6;
         font-style: italic;
         margin-bottom: 2rem;
-        text-align: center;
-        font-weight: 300;
-        line-height: 1.6;
+        padding-left: 1rem;
+        border-left: 2px solid var(--blue-600);
     }
 
-    /* 特色图片样式 */
+    /* 特色图片 */
     .featured-image {
+        margin: 2rem 0;
+    }
+
+    .image-frame {
         position: relative;
-        border-radius: 15px;
+        border: 1px solid var(--slate-700);
+        border-radius: 2px;
         overflow: hidden;
-        margin-bottom: 2rem;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        transform: perspective(1000px) rotateX(5deg);
-        transition: transform 0.3s ease;
+        background: var(--slate-900);
     }
 
-    .featured-image:hover {
-        transform: perspective(1000px) rotateX(0deg) scale(1.02);
-    }
-
-    .featured-image img {
+    .image-frame img {
         width: 100%;
-        height: 300px;
-        object-fit: cover;
+        height: auto;
         display: block;
-        transition: transform 0.3s ease;
+        filter: contrast(1.1) brightness(0.9);
+        transition: filter 0.3s var(--ease-cold);
     }
 
-    .image-overlay {
+    .image-frame:hover img {
+        filter: contrast(1.2) brightness(1);
+    }
+
+    .image-scan-line {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--blue-400), transparent);
+        animation: imageScan 4s linear infinite;
         opacity: 0;
-        transition: opacity 0.3s ease;
     }
 
-    .featured-image:hover .image-overlay {
+    .image-frame:hover .image-scan-line {
         opacity: 1;
     }
 
-    /* 标签区域样式 */
-    .tags-container {
-        position: relative;
+    @keyframes imageScan {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(400px); }
     }
 
-    .tags-title {
-        margin: 0 0 1rem 0;
-        font-size: 1rem;
-        font-weight: 500;
-        text-align: center;
-    }
-
-    .tags {
+    .image-caption {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
     }
 
-    .tag {
+    .caption-label {
+        color: var(--blue-500);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+    }
+
+    .caption-text {
+        color: var(--slate-400);
+    }
+
+    /* 文章内容 */
+    .post-content {
         position: relative;
-        padding: 0.6rem 1.2rem;
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 25px;
-        color: white;
-        text-decoration: none;
-        font-size: 0.85rem;
-        font-weight: 500;
+    }
+
+    .content-wrapper {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--slate-800);
+        border-radius: 2px;
+        padding: 3rem;
         backdrop-filter: blur(10px);
-        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
         overflow: hidden;
     }
 
-    .tag:hover {
-        transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        background: rgba(255, 255, 255, 0.3);
-        border-color: white;
-    }
-
-    .tag-text, .tag-hover {
-        transition: all 0.3s ease;
-    }
-
-    .tag-hover {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0;
-    }
-
-    .tag:hover .tag-text {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    .tag:hover .tag-hover {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-
-    /* 文章内容样式 */
-    .post-content {
-        background: white;
-        border-radius: 20px;
-        padding: 2.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        position: relative;
-        z-index: 1;
-    }
-
-    .post-content::before {
+    .content-wrapper::before {
         content: '';
         position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
-        border-radius: 22px;
-        z-index: -1;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        background: linear-gradient(45deg, var(--blue-600), transparent, var(--blue-600));
         background-size: 200% 200%;
-        animation: gradient-border 3s ease infinite;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        animation: borderGlow 6s ease-in-out infinite;
+        z-index: -1;
+        border-radius: 2px;
+        opacity: 0.5;
     }
 
-    .post-content:hover::before {
-        opacity: 1;
+    @keyframes borderGlow {
+        0%, 100% { background-position: 0% 50%; opacity: 0.3; }
+        50% { background-position: 100% 50%; opacity: 0.6; }
     }
 
-    @keyframes gradient-border {
-        0%, 100% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
+    /* 内容区域的排版增强 */
+    .content-wrapper :global(h1),
+    .content-wrapper :global(h2),
+    .content-wrapper :global(h3),
+    .content-wrapper :global(h4),
+    .content-wrapper :global(h5),
+    .content-wrapper :global(h6) {
+        font-family: var(--font-mono);
+        color: var(--slate-100);
+        margin: 2rem 0 1rem;
+        position: relative;
+        padding-left: 1rem;
     }
 
-    /* 深色模式支持 */
-    html.dark .post-content {
-        background: #1e293b;
-        color: #f1f5f9;
+    .content-wrapper :global(h1)::before,
+    .content-wrapper :global(h2)::before,
+    .content-wrapper :global(h3)::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 1.2em;
+        background: var(--gradient-blue);
     }
 
-    html.dark .featured-image {
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    .content-wrapper :global(p) {
+        color: var(--slate-300);
+        line-height: 1.8;
+        margin: 1.5rem 0;
+    }
+
+    .content-wrapper :global(blockquote) {
+        border-left: 3px solid var(--blue-500);
+        background: rgba(59, 130, 246, 0.1);
+        padding: 1rem 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: var(--blue-200);
+        position: relative;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .content-wrapper :global(code) {
+        background: rgba(59, 130, 246, 0.2);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: var(--blue-200);
+        padding: 0.2em 0.4em;
+        border-radius: 2px;
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+    }
+
+    .content-wrapper :global(pre) {
+        background: var(--slate-900);
+        border: 1px solid var(--slate-700);
+        border-radius: 2px;
+        padding: 1.5rem;
+        overflow-x: auto;
+        margin: 2rem 0;
+        position: relative;
+    }
+
+    .content-wrapper :global(pre)::before {
+        content: 'CODE';
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--slate-500);
+        letter-spacing: 0.1em;
     }
 
     /* 响应式设计 */
-    @media (max-width: 768px) {
-        .post-header {
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+    @media (max-width: 968px) {
+        .post-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
         }
 
-        .post-meta {
-            flex-direction: column;
-            align-items: stretch;
-            text-align: center;
+        .post-sidebar {
+            position: static;
+            order: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
-        .featured-image {
-            transform: none;
-        }
-
-        .featured-image:hover {
-            transform: scale(1.02);
-        }
-
-        .featured-image img {
-            height: 200px;
-        }
-
-        .post-content {
-            padding: 1.5rem;
-        }
-
-        .tags {
-            justify-content: center;
+        .post-main {
+            order: 1;
         }
     }
 
-    /* 动画效果 */
+    @media (max-width: 640px) {
+        .post-container {
+            padding: 1rem;
+        }
+
+        .post-sidebar {
+            grid-template-columns: 1fr;
+        }
+
+        .content-wrapper {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.8rem;
+        }
+    }
+
+    /* 入场动画 */
     .post-container {
-        animation: fadeInUp 0.6s ease-out;
+        animation: fadeIn 0.8s var(--ease-cold);
     }
 
-    @keyframes fadeInUp {
+    @keyframes fadeIn {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
         }
         to {
             opacity: 1;
@@ -311,19 +534,41 @@ import BaseLayout from "./BaseLayout.astro";
         }
     }
 
-    /* 滚动动画 */
-    .post-content {
-        animation: slideIn 0.8s ease-out 0.2s both;
+    .post-sidebar > * {
+        animation: slideInLeft 0.6s var(--ease-cold) forwards;
+        animation-delay: 0.2s;
+        opacity: 0;
     }
 
-    @keyframes slideIn {
+    .post-sidebar > *:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes slideInLeft {
         from {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateX(-20px);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
+        }
+    }
+
+    .post-main {
+        animation: slideInRight 0.6s var(--ease-cold) forwards;
+        animation-delay: 0.3s;
+        opacity: 0;
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
         }
     }
 </style>
