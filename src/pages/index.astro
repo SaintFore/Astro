@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Greeting from "../components/Greeting.jsx";
+import DailyInspiration from "../components/DailyInspiration.jsx";
 
 const pageTitle = "My Page";
 const greetingMessages = [
@@ -19,4 +20,5 @@ const greetingMessages = [
 <BaseLayout pageTitle={pageTitle}>
 	<h2>我的博客</h2>
 	<Greeting message={greetingMessages} client:load />
+	<DailyInspiration client:load />
 </BaseLayout>
