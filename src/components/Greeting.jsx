@@ -36,66 +36,69 @@ export default function Greeting({message}) {
     }, []);
 
     const greetingStyle = {
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        borderRadius: '20px',
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%)',
+        borderRadius: '0px',
         padding: '2rem',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-        border: '1px solid rgba(255,255,255,0.2)',
+        boxShadow: '0 0 30px rgba(0, 255, 255, 0.1), inset 0 0 30px rgba(0, 255, 255, 0.05)',
+        border: '1px solid rgba(0, 255, 255, 0.3)',
         backdropFilter: 'blur(10px)',
         minHeight: '200px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamily: '"Inter", sans-serif'
+        fontFamily: '"Courier New", monospace'
     };
 
     const titleStyle = {
         fontSize: '2.5rem',
         fontWeight: '700',
-        background: 'linear-gradient(45deg, #fff, #f0f8ff)',
+        background: 'linear-gradient(45deg, #00ffff, #ffffff)',
         backgroundClip: 'text',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         textAlign: 'center',
         margin: '0 0 1.5rem 0',
-        textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+        textShadow: '0 0 20px rgba(0, 255, 255, 0.5)',
         transform: isAnimating ? 'scale(0.9) rotateX(90deg)' : 'scale(1) rotateX(0deg)',
         transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        opacity: isAnimating ? 0 : 1
+        opacity: isAnimating ? 0 : 1,
+        fontFamily: '"Courier New", monospace',
+        letterSpacing: '2px'
     };
 
     const buttonStyle = {
-        background: 'linear-gradient(45deg, #ff6b6b, #feca57)',
-        border: 'none',
-        borderRadius: '50px',
+        background: 'linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(0, 128, 255, 0.2))',
+        border: '1px solid #00ffff',
+        borderRadius: '0px',
         padding: '1rem 2rem',
-        fontSize: '1.1rem',
+        fontSize: '1rem',
         fontWeight: '600',
-        color: 'white',
+        color: '#00ffff',
         cursor: 'pointer',
-        boxShadow: '0 8px 25px rgba(255, 107, 107, 0.3)',
+        boxShadow: '0 0 20px rgba(0, 255, 255, 0.2)',
         transition: 'all 0.3s ease',
         position: 'relative',
         textTransform: 'uppercase',
-        letterSpacing: '1px',
+        letterSpacing: '2px',
         transform: isAnimating ? 'scale(0.95)' : 'scale(1)',
-        animation: 'pulse 2s infinite'
+        fontFamily: '"Courier New", monospace'
     };
 
     const particleStyle = (particle) => ({
         position: 'absolute',
-        width: '4px',
-        height: '4px',
-        background: 'rgba(255,255,255,0.8)',
+        width: '2px',
+        height: '2px',
+        background: '#00ffff',
         borderRadius: '50%',
         left: `${particle.x}%`,
         top: `${particle.y}%`,
         animation: `float ${particle.duration}s ease-in-out infinite`,
         animationDelay: `${particle.delay}s`,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        boxShadow: '0 0 4px #00ffff'
     });
 
     return (
@@ -112,25 +115,14 @@ export default function Greeting({message}) {
                     }
                 }
                 
-                @keyframes pulse {
-                    0% { box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); }
-                    50% { box-shadow: 0 12px 35px rgba(255, 107, 107, 0.5); }
-                    100% { box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); }
-                }
-                
                 .greeting-button:hover {
                     transform: translateY(-2px) scale(1.05) !important;
-                    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4) !important;
-                    background: linear-gradient(45deg, #ff5252, #ff9800) !important;
+                    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4) !important;
+                    background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), rgba(0, 128, 255, 0.3)) !important;
                 }
                 
                 .greeting-button:active {
                     transform: translateY(0px) scale(0.98) !important;
-                }
-                
-                @keyframes sparkle {
-                    0%, 100% { opacity: 0; transform: scale(0); }
-                    50% { opacity: 1; transform: scale(1); }
                 }
             `}</style>
             
@@ -141,10 +133,10 @@ export default function Greeting({message}) {
             
             {/* 主标题 */}
             <h3 style={titleStyle}>
-                {greeting}! ✨ 欢迎来访！ 🚀
+                {greeting}! ACCESS_GRANTED
             </h3>
             
-            {/* 炫酷按钮 */}
+            {/* 冷峻按钮 */}
             <button 
                 className="greeting-button"
                 style={buttonStyle}
@@ -156,7 +148,7 @@ export default function Greeting({message}) {
                     e.target.style.transform = isAnimating ? 'scale(0.95)' : 'scale(1)';
                 }}
             >
-                🎲 换个问候语 ✨
+                [RANDOMIZE_GREETING]
             </button>
             
             {/* 装饰性光晕 */}

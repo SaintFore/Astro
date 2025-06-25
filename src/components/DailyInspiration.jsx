@@ -54,20 +54,20 @@ export default function DailyInspiration() {
     const getTimeBasedStyle = () => {
         const styles = {
             morning: {
-                background: 'linear-gradient(135deg, #FF9A8B 0%, #A8E6CF 100%)',
-                textColor: '#2c3e50'
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%)',
+                textColor: '#e0e6ed'
             },
             afternoon: {
-                background: 'linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%)',
-                textColor: '#2c3e50'
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(22, 33, 62, 0.9) 100%)',
+                textColor: '#e0e6ed'
             },
             evening: {
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                textColor: '#ffffff'
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%)',
+                textColor: '#e0e6ed'
             },
             night: {
-                background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
-                textColor: '#ecf0f1'
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%)',
+                textColor: '#e0e6ed'
             }
         };
         return styles[timeOfDay];
@@ -75,13 +75,13 @@ export default function DailyInspiration() {
 
     const containerStyle = {
         ...getTimeBasedStyle(),
-        borderRadius: '25px',
+        borderRadius: '0px',
         padding: '2.5rem',
-        margin: '2rem 0',
+        margin: '0',
         position: 'relative',
         overflow: 'hidden',
-        boxShadow: '0 25px 50px rgba(0,0,0,0.15)',
-        border: '2px solid rgba(255,255,255,0.1)',
+        boxShadow: '0 0 30px rgba(0, 255, 255, 0.1), inset 0 0 30px rgba(0, 255, 255, 0.05)',
+        border: '1px solid rgba(0, 255, 255, 0.3)',
         backdropFilter: 'blur(20px)',
         minHeight: '300px',
         display: 'flex',
@@ -91,7 +91,7 @@ export default function DailyInspiration() {
         textAlign: 'center',
         cursor: 'pointer',
         transition: 'all 0.5s ease',
-        fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, sans-serif'
+        fontFamily: '"Courier New", monospace'
     };
 
     const quoteStyle = {
@@ -134,13 +134,13 @@ export default function DailyInspiration() {
     };
 
     const buttonStyle = {
-        background: 'rgba(255,255,255,0.2)',
-        border: '2px solid rgba(255,255,255,0.3)',
-        borderRadius: '50px',
+        background: 'rgba(0, 255, 255, 0.1)',
+        border: '1px solid rgba(0, 255, 255, 0.5)',
+        borderRadius: '0px',
         padding: '1rem 2rem',
-        fontSize: '1.1rem',
+        fontSize: '1rem',
         fontWeight: '600',
-        color: getTimeBasedStyle().textColor,
+        color: '#00ffff',
         cursor: 'pointer',
         marginTop: '2rem',
         transition: 'all 0.3s ease',
@@ -148,29 +148,31 @@ export default function DailyInspiration() {
         position: 'relative',
         zIndex: 2,
         textTransform: 'uppercase',
-        letterSpacing: '1px'
+        letterSpacing: '2px',
+        fontFamily: '"Courier New", monospace'
     };
 
     const starStyle = (star) => ({
         position: 'absolute',
         width: `${star.size}px`,
         height: `${star.size}px`,
-        background: 'rgba(255,255,255,0.7)',
+        background: '#00ffff',
         borderRadius: '50%',
         left: `${star.x}%`,
         top: `${star.y}%`,
         animation: `twinkle ${star.duration}s ease-in-out infinite`,
         animationDelay: `${star.delay}s`,
         pointerEvents: 'none',
-        zIndex: 1
+        zIndex: 1,
+        boxShadow: '0 0 4px #00ffff'
     });
 
     const getTimeGreeting = () => {
         const greetings = {
-            morning: "🌅 早安时光",
-            afternoon: "☀️ 午后阳光",
-            evening: "🌆 傍晚时分",
-            night: "🌙 夜深人静"
+            morning: "SYS_TIME: 06:00-12:00",
+            afternoon: "SYS_TIME: 12:00-18:00", 
+            evening: "SYS_TIME: 18:00-24:00",
+            night: "SYS_TIME: 00:00-06:00"
         };
         return greetings[timeOfDay];
     };
@@ -212,9 +214,10 @@ export default function DailyInspiration() {
                 }
                 
                 .inspiration-button:hover {
-                    background: rgba(255,255,255,0.3) !important;
-                    border: 2px solid rgba(255,255,255,0.5) !important;
+                    background: rgba(0, 255, 255, 0.2) !important;
+                    border: 1px solid #00ffff !important;
                     transform: translateY(-2px) scale(1.05) !important;
+                    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
                 }
             `}</style>
             
@@ -225,19 +228,20 @@ export default function DailyInspiration() {
             
             {/* 时间问候 */}
             <div style={{
-                fontSize: '1rem',
+                fontSize: '0.9rem',
                 opacity: 0.7,
                 marginBottom: '1rem',
                 fontWeight: '500',
-                color: getTimeBasedStyle().textColor,
+                color: '#00ffff',
                 position: 'relative',
-                zIndex: 2
+                zIndex: 2,
+                fontFamily: '"Courier New", monospace',
+                letterSpacing: '1px'
             }}>
                 {getTimeGreeting()}
             </div>
             
-            {/* 表情符号 */}
-            <span style={emojiStyle}>{currentInspiration.emoji}</span>
+            {/* 表情符号 - 移除，更冷峻 */}
             
             {/* 名言 */}
             <blockquote style={quoteStyle}>
@@ -258,7 +262,7 @@ export default function DailyInspiration() {
                     getNewInspiration();
                 }}
             >
-                ✨ 获取新灵感 ✨
+                [GENERATE_NEW_QUOTE]
             </button>
             
             {/* 装饰性渐变 */}
